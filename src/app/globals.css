@@ -19,3 +19,8 @@
 body {
   color: rgb(var(--foreground-rgb));
 }
+
+input{
+  outline: none;
+  color: #000;
+}

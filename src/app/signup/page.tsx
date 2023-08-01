@@ -7,6 +7,7 @@ import useRouter from 'next/navigation'
 
 const SignUp = () => {
  const initialState = {
+  username:'',
   email:'',
   password:'',
  }
@@ -18,8 +19,16 @@ const SignUp = () => {
 
   return (
     <div className=' bg-black flex  min-h-screen text-slate-50 items-center justify-center flex-col gap-5'>
-      <h1 className=' md:text-[24px]'>Login</h1>
+      <h1 className=' md:text-[24px]'>SignUp</h1>
       <form className=' flex flex-col gap-5' onSubmit={handleSubmit}>
+        <div className=' flex flex-col gap-1 '>
+          <label htmlFor="username">username</label>
+          <input type="text" id='username' placeholder='username'
+          className=' rounded-md p-4' 
+          value={userData.username} 
+          onChange={(e)=> setUserData({...userData, username:e.target.value})}
+          />
+        </div>
         <div className=' flex flex-col gap-1 '>
           <label htmlFor="email">email</label>
           <input type="email" id='email' placeholder='email'
@@ -38,6 +47,7 @@ const SignUp = () => {
         </div>
         <div className=' flex flex-col gap-5 justify-center items-center'>
         <button className=' bg-slate-50 text-slate-900 w-full p-2 rounded-md'>SignUp</button>
+        <Link href='/login'>Don`t have an account?</Link>
         </div>
       </form>
     </div>
