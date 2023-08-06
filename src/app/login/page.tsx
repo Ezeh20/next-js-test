@@ -38,6 +38,7 @@ const SignUp = () => {
         </div>
         <div className=' flex flex-col gap-5 justify-center items-center'>
         <button className=' bg-slate-50 text-slate-900 w-full p-2 rounded-md'>SignUp</button>
+        <Link href='/signup'>Don`t have an account?</Link>
         </div>
       </form>
     </div>

@@ -7,3 +7,5 @@ const connect = async () => {
         console.log("something went wrong")
     }
 }
+
+export default connect
