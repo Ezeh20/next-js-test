@@ -5,7 +5,8 @@ import bcryptjs from "bcryptjs";
 
 const POST = async (request: NextRequest) => {
     await connect()
-    const { username, email, password } = await request.json();
+    const body = await request.json();
+    const { username, email, password } = body
 
     //check if the user already exists
     const user = await User.findOne({ email })
@@ -27,9 +28,9 @@ const POST = async (request: NextRequest) => {
     try {
         //save the user in the db
         await newUser.save()
-        return NextResponse.json({ message: "Account created successfully"}, { status: 201 })
+        return NextResponse.json({ message: "Account created successfully" }, { status: 201 })
 
-    } catch (error) {
+    } catch (error: unknown) {
         return NextResponse.json({ error: error.message }, { status: 500 })
     }
 } 

@@ -1,17 +1,26 @@
 "use client"
-
-import React from 'react'
-import axios from 'axios'
+import React, { useEffect } from 'react'
+import {axios} from 'axios'
 import Link from 'next/link'
 import useRouter from 'next/navigation'
 
 const SignUp = () => {
+  const router = useRouter()
  const initialState = {
   username:'',
   email:'',
   password:'',
  }
   const [userData, setUserData] = React.useState(initialState)
+  const [disabled, setDisabled] = React.useState(true)
+
+  useEffect(()=>{
+      if(userData.email.length > 0 && userData.password.length > 0 && userData.username.length > 0){
+        setDisabled(false)
+      }else{
+        setDisabled(true)
+      }
+  },[userData])
 
   const handleSubmit = async (e) =>{
     e.preventDefault()
