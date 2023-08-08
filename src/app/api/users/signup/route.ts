@@ -1,20 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcrypt";
-import User from "@/models/userModel";
+import User from "@/models/User-model"
 import connect from "@/utils/dbConfig";
 
-connect();
-
 export const POST = async (request: NextRequest) => {
-  const body = await request.json();
-  const { username, password, email } = body;
-  console.log(body);
-  
+  const reqbody = await request.json();
+  const { username, password, email } = reqbody;
 
+  await connect();
+  //check if the user already exists
   const user = await User.findOne({ email });
 
   if (user) {
-    return NextResponse.json({ error: "User already exists" }, { status: 401 });
+    return NextResponse.json({ error: "user already exists" }, { status: 401 });
   }
 
   const salt = await bcryptjs.genSalt(10);
@@ -29,9 +27,11 @@ export const POST = async (request: NextRequest) => {
 
   try {
     await newUser.save();
-    return NextResponse.json({message:"Account created successfully"}, {status: 201})
-    
-  } catch (error:any) {
-    return NextResponse.json({error: error.message}, {status:500})
+    return NextResponse.json(
+      { message: "Account created successfully" },
+      { status: 201 }
+    );
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 };
