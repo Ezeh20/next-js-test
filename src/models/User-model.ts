@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
-
-let User:any;
+let User:any
 
 if (mongoose.models.User) {
     User = mongoose.model('User');
