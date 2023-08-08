@@ -12,7 +12,7 @@ const SignUp = () => {
  }
   const [userData, setUserData] = React.useState(initialState)
 
-  const handleSubmit = async (e) =>{
+  const handleSubmit = async (e:any) =>{
     e.preventDefault()
   }
 

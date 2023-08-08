@@ -1,6 +1,5 @@
 "use client"
 import React, { useEffect } from 'react'
-//import axios from 'axios'
 import { useRouter}  from 'next/navigation'
 import axios from 'axios'
 
@@ -15,7 +14,6 @@ const SignUp = () => {
   const [disabled, setDisabled] = React.useState(true)
   const [loading, setLoading] = React.useState(false)
 
-  const {username, email, password} = userData
   
   useEffect(()=>{
       if(userData.email.length > 0 && userData.password.length > 0 && userData.username.length > 0){
@@ -29,10 +27,8 @@ const SignUp = () => {
     e.preventDefault()
     try {
       setLoading(true)
-      const res = await axios.post("/api/users/signup", userData)
+      await axios.post("/api/users/signup", userData)
       setLoading(false)
-      console.log(res);
-      
       router.push('/login')      
 
     } catch (error:any) {
