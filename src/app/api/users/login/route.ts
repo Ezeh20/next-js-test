@@ -13,7 +13,6 @@ export const POST = async (request: NextRequest) => {
     //check if the user exists
     const user = await User.findOne({ email });
 
-    console.log(user);
     if (!user) {
       return NextResponse.json(
         { error: "Wrong username or password" },
