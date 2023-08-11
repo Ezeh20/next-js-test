@@ -9,7 +9,7 @@ export const middleware = (request: NextRequest) => {
   const path = request.nextUrl.pathname;
 
   //check your public paths and redirect the user as need be
-  const isPublic = path === '/login' || path === '/signup'
+  const isPublic = path === "/login" || path === "/signup";
 
   //get the token value stored in the cookies if it exists
   //cause if it exists, it means that the user is logged in
@@ -24,7 +24,11 @@ export const middleware = (request: NextRequest) => {
     return NextResponse.redirect(new URL("/profile", request.nextUrl));
   }
 
-  if(!isPublic && !token){
+  /**
+   * for an unauthenticated user who tries to access prtected pages, redirect to the login page
+   */
+
+  if (!isPublic && !token) {
     return NextResponse.redirect(new URL("/login", request.nextUrl));
   }
 };
