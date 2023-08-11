@@ -15,7 +15,7 @@ interface User{
 const Profile = () => {
   const router = useRouter()
 const [userData, setUserData] = useState<User>()
-const [session, setSession] = useState(false)
+const [sessionExpired, setSessionExpried] = useState(false)
 const [loading, setLoading] = useState(false)
 const [error, setError] = useState("")
 
@@ -39,18 +39,21 @@ const [error, setError] = useState("")
         const res = await fetch('/api/users/profile')
         setLoading(false)
         const data = await res.json()
-        if(data.error){
-          router.push('/login')
-        }
         setUserData(data.data)
-        setSession(data)
-      } catch (err:any) {
-        console.log(err);
+        if(data.error){
+          setSessionExpried(true)
+        }
+      } catch (error:any) {
+        console.log(error);
       }
     }
     userInfo()
-  },[])
-
+  },[router])
+  
+  //if session has expired popup a revalidate
+  if(sessionExpired){
+     logout()
+  }
 
   return (
     <div className=' min-h-screen bg-slate-950 text-slate-100 flex justify-center items-center'>

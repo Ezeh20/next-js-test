@@ -17,7 +17,7 @@ export const GET = async (request: NextRequest) => {
     );
 
     if (!user) {
-      return NextResponse.json({ error: "User not found" }, { status: 401 });
+      return NextResponse.json({ error: "Session timedout" }, { status: 401 });
     }
     //return the user with other messages
     return NextResponse.json({
