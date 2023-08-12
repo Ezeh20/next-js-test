@@ -27,14 +27,14 @@ const SignUp = () => {
     e.preventDefault()
     try {
       setLoading(true)
-      await axios.post("/api/users/signup", userData)
+      const res = await axios.post("/api/users/signup", userData)
       setLoading(false)
+      console.log(res);
       router.push('/login')      
 
     } catch (error:any) {
       const {response} = error
       console.log(response.data.error);
-      
       setLoading(false)
     }finally{
       setLoading(false)

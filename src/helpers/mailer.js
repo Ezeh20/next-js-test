@@ -4,9 +4,9 @@
  * including the token expiry date
  */
 import User from "@/models/User-model";
-import bcryptjs from "bcrypt";
 import connect from "@/utils/dbConfig";
 import nodemailer from "nodemailer";
+import { NextResponse } from "next/server";
 connect();
 
 export const mailingService = async ({
@@ -69,6 +69,6 @@ export const mailingService = async ({
     const mailResponse = await transport.sendMail(mailOptions);
     return mailResponse;
   } catch (error) {
-    throw new Error(error.message);
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 };

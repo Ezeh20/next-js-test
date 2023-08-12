@@ -14,6 +14,17 @@ export const POST = async (request: NextRequest) => {
       verifyToken: token,
       verifyTokenExpiry: { $gt: Date.now() },
     });
+
+    if (!user) {
+      return NextResponse.json(
+        { error: "Invalid or expired code" },
+        { status: 401 }
+      );
+    }
+    user.isVerified = true;
+    user.verifyToken = undefined;
+    user.verifyTokenExpiry = undefined;
+    await user.save();
   } catch (error: any) {
     return NextResponse.json({ error: error.message });
   }

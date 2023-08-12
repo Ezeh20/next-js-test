@@ -23,6 +23,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/utils/dbConfig.ts", "src/models/userModel.js", "src/helpers/mailer.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/utils/dbConfig.ts", "src/models/userModel.js", "src/helpers/mailer.js", "src/app/api/users/sendverifycode/route.js"],
   "exclude": ["node_modules"]
 }

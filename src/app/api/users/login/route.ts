@@ -38,7 +38,7 @@ export const POST = async (request: NextRequest) => {
 
     //create a token for the client
     const token = jwt.sign(userData, process.env.TOKEN_SECRET!, {
-      expiresIn: "1m",
+      expiresIn: "1d",
     });
 
     //response
@@ -49,7 +49,7 @@ export const POST = async (request: NextRequest) => {
 
     response.cookies.set("token", token, {
       httpOnly: true,
-      expires: Date.now() + 60000,
+      expires: Date.now() + 3600000,
     });
     return response;
   } catch (error: any) {
