@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import User from "@/models/User-model";
 import connect from "@/utils/dbConfig";
-
 connect();
 
 export const GET = async (request: NextRequest) => {
@@ -10,9 +9,9 @@ export const GET = async (request: NextRequest) => {
     //get the token from the cookies if it exists
     const token = request.cookies.get("token")?.value || "";
     //decode the token
-    const encryptedData: any = jwt.verify(token, process.env.TOKEN_SECRET!);
+    const encodedData: any = jwt.verify(token, process.env.TOKEN_SECRET!);
     //use that id to look for the user in the database
-    const user = await User.findOne({ _id: encryptedData.id }).select(
+    const user = await User.findOne({ _id: encodedData.id }).select(
       "-password"
     );
 
@@ -24,7 +23,7 @@ export const GET = async (request: NextRequest) => {
       message: "user found",
       data: user,
       success: true,
-      tokenexp: encryptedData.exp,
+      tokenexp: encodedData.exp,
       token: token,
     });
   } catch (error: any) {

@@ -1,23 +1,18 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import axios from 'axios'
 import { useRouter } from "next/navigation";
 import Link from 'next/link';
-
-interface User{
-  _id: string,
-  username: string,
-  email:string,
-  isAdmin: boolean,
-  isVerified: boolean
-}
+import { useContext, useEffect } from 'react';
+import { UserContext } from '@/context/userContext';
 
 const Profile = () => {
   const router = useRouter()
-const [userData, setUserData] = useState<User>()
-const [sessionExpired, setSessionExpried] = useState(false)
-const [loading, setLoading] = useState(true)
-const [error, setError] = useState("")
+  const {userData, loading, sessionExpired, setLoadData}:any = useContext(UserContext)
+
+useEffect(()=>{
+   setLoadData(true)
+},[setLoadData])
 
   //logout function
   const logout = async()=> {
@@ -32,26 +27,7 @@ const [error, setError] = useState("")
     }
   }
 
-  //fetch the user
-  useEffect(()=>{
-    const userInfo = async()=>{
-      try {
-        const res = await fetch('/api/users/profile')
-        const data = await res.json()
-        setUserData(data.data)
-        setLoading(false)
-        if(data.error){
-          setSessionExpried(true)
-        }
-      } catch (error:any) {
-        console.log(error);
-      }finally{
-        setLoading(false)
-      }
-    }
-    userInfo()
-  },[router])
-  
+ 
   //if session has expired popup a revalidate
   if(sessionExpired){
      logout()
