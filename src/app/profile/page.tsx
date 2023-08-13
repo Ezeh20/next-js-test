@@ -21,7 +21,6 @@ useEffect(()=>{
       if(!data.error){
         router.push('/')
       }
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -70,7 +69,7 @@ useEffect(()=>{
         <Link href={`profile/${userData?._id}`}>Link</Link>
       </div>
       {
-        loading ? "loading..." : <button onClick={resendCode}>Verify</button>
+        loading ? "loading..." : <Link href={'/verify'}>Verify</Link>
       }
     </div>
   )

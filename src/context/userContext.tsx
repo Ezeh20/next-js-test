@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { createContext } from "react";
 
@@ -26,7 +25,6 @@ const userInfo = async()=>{
     try {
       const res = await fetch('/api/users/profile')
       const data = await res.json()
-      console.log(data);
       setUserData(data.data)
       setLoading(false)
       if(data.error === "jwt expired"){
