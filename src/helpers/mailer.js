@@ -54,10 +54,11 @@ export const mailingService = async ({
       to: `${email}`,
       subject: `${emailType === "VERIFY" ? "Verify your email" : "Reset your password"
         }`,
-      text: "You are getting this email because you need to verify your email to gain full access to the system. Please do so",
+      text: `${emailType === "VERIFY" ? "You are getting this email because you need to verify your email to gain full access to the system. Please do so"
+        : emailType === "RESET" ? "Reset your password" : ""}`,
       html: `<div style="display:flex, flex-direction:column, gap:1rem">
       <p>Click 
-      <a style="text-decoration:none, list-style:none, color:#fff" href="${process.env.DOMAIN}/verify?token=${verifyToken}">
+      <a style="text-decoration:none, list-style:none, color:#fff" href="${process.env.DOMAIN}/verify?token=${verifyToken}&email=${email}">
           <button style="color:#000, padding:1rem, border-radius:10px">Here</button>
       </a>
       to ${emailType === "VERIFY" ? "Verify your email" : "Reset your password"}

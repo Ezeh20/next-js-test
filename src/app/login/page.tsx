@@ -60,6 +60,7 @@ const SignUp = () => {
           }
         </button>
         <Link href='/signup'>Don`t have an account?</Link>
+        <Link href='/passwordReset'>Forgot password ?</Link>
         </div>
       </form>
     </div>

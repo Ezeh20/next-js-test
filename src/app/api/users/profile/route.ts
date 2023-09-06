@@ -14,7 +14,7 @@ export const GET = async (request: NextRequest) => {
     const user = await User.findOne({ _id: encodedData.id }).select(
       "-password"
     );
-
+    
     if (!user) {
       return NextResponse.json({ error: "Session timedout" }, { status: 401 });
     }
